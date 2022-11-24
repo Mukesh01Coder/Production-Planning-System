@@ -1,0 +1,56 @@
+﻿@model Production_Planning_System.Models.Production
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header text-center bg-primary text-uppercase text-white">
+            <h1>Product Details</h1>
+        </div>
+        <div class="card-body">
+            <div>
+               
+                <img src="~/Images/@Model.ImageName"
+                     height="100" width="90"
+                     asp-append-version="true" />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Product_Name)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Product_Name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Product_Shape)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Product_Shape)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Product_Color)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Product_Color)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Product_Quantity)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Product_Quantity)
+                    </dd>
+                </dl>
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.Product_Id" class="btn btn-sm btn-primary rounded-2 text-uppercase">Edit</a> 
+                <a asp-action="Delete" asp-route-id="@Model?.Product_Id" class="btn btn-sm btn-danger rounded-2 text-uppercase">Delete</a>
+                <a asp-action="Index" class="btn btn-sm btn-info rounded-2 text-uppercase text-white"><i class="fas fa-fast-backward"></i>Back to List</a>
+            </div>
+
+           
+        </div>
+    </div>
+</div>
+
+ 

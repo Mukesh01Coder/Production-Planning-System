@@ -1,0 +1,78 @@
+﻿@model Production_Planning_System.Models.Administration
+
+@{
+    ViewData["Title"] = "Employee Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-md-8 mx-auto py-4">
+    <div class="card">
+        <div class="card-header text-center bg-primary text-uppercase text-white">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+        <div class="card-body">
+
+            <div>
+
+                <img src="~/Images/@Model.ImageName"
+                     height="100" width="90"
+                     asp-append-version="true" />
+
+                <dl class="row">
+
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.FullName)
+                    </dd>
+                    <br />
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Gender)
+                    </dd>
+                    <br />
+
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Age)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Age)
+                    </dd>
+                    <br />
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Position)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Position)
+                    </dd>
+                   <br />
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Office)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Office)
+                    </dd>
+                    <br />
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Salary)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Salary)
+                    </dd>
+                   <br />
+                </dl>
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm btn-primary rounded-2 text-uppercase">Edit</a>
+                <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-sm btn-danger rounded-2 text-uppercase">Delete</a>
+                <a asp-action="Index" class="btn btn-sm btn-info rounded-2 text-uppercase text-white"><i class="fas fa-fast-backward"></i> Back to List</a>
+
+            </div>
+        </div>
+    </div>
+</div>

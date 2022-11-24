@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Production_Planning_System.Models.Sales>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header text-center bg-primary text-uppercase text-white">
+            <h1>Sales Details</h1>
+        </div>
+        <div class="card-body">
+            <div>
+                <a class="btn btn-info" asp-action="Create">Add New Sales</a>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.order_num)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Demand)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Oder_Type)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.order_num)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Demand)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Oder_Type)
+                            </td>
+                            <td>
+                               
+                                <a asp-action="Details" asp-route-id="@item.sales_Id">Details</a> 
+                               
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+       
+  

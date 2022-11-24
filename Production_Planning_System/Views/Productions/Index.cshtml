@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Production_Planning_System.Models.Production>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header text-center bg-primary text-uppercase text-white">
+            <h1>Products Detail</h1>
+         </div>
+        <div class="card-body">
+            <br />
+            <div>
+                <a class="btn btn-info" asp-action="Create">Add Product</a>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Shape)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Color)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Quantity)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/Images/@item.ImageName"
+                                 class="rounded-circle"
+                                 height="40" width="40"
+                                 asp-append-version="true" />
+                                @Html.DisplayFor(modelItem =>item.Product_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_Shape)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_Color)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product_Quantity)
+                            </td>
+                            <td>
+                                
+                                <a asp-action="Details" asp-route-id="@item.Product_Id">Details</a>
+                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+      
+  
