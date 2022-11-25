@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProductionPlanningSystem.Migrations
 {
     /// <inheritdoc />
-    public partial class mk : Migration
+    public partial class pps : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,13 +17,13 @@ namespace ProductionPlanningSystem.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Office = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Position = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Office = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Salary = table.Column<int>(type: "int", nullable: false),
                     ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -78,9 +78,9 @@ namespace ProductionPlanningSystem.Migrations
                 {
                     ProductId = table.Column<int>(name: "Product_Id", type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(name: "Product_Name", type: "nvarchar(max)", nullable: false),
-                    ProductShape = table.Column<string>(name: "Product_Shape", type: "nvarchar(max)", nullable: false),
-                    ProductColor = table.Column<string>(name: "Product_Color", type: "nvarchar(max)", nullable: false),
+                    ProductName = table.Column<string>(name: "Product_Name", type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    ProductShape = table.Column<string>(name: "Product_Shape", type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    ProductColor = table.Column<string>(name: "Product_Color", type: "nvarchar(20)", maxLength: 20, nullable: false),
                     ProductQuantity = table.Column<int>(name: "Product_Quantity", type: "int", nullable: false),
                     ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -97,8 +97,8 @@ namespace ProductionPlanningSystem.Migrations
                     salesId = table.Column<int>(name: "sales_Id", type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ordernum = table.Column<int>(name: "order_num", type: "int", nullable: false),
-                    Demand = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OderType = table.Column<string>(name: "Oder_Type", type: "nvarchar(max)", nullable: false),
+                    Demand = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    OderType = table.Column<string>(name: "Oder_Type", type: "nvarchar(30)", maxLength: 30, nullable: false),
                     ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

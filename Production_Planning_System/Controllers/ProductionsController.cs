@@ -63,21 +63,29 @@ namespace Production_Planning_System.Controllers
         {
             if (ModelState.IsValid)
             {
-               // var imgext = Path.GetExtension(ProfileImage.FileName);
+               
+                var imgext = Path.GetExtension(fileobj.FileName);
 
-
-                var Productpath = Path.Combine(webHostEnvironment.WebRootPath, "Images", fileobj.FileName);
-                using (FileStream stream = new FileStream(Productpath, FileMode.Create))
+                if (imgext == ".jpg" || imgext == ".png" || imgext == ".jpeg" || imgext == ".jfif")
                 {
-                    await fileobj.CopyToAsync(stream);
-                    stream.Close();
+
+                    var Productpath = Path.Combine(webHostEnvironment.WebRootPath, "Images", fileobj.FileName);
+                    using (FileStream stream = new FileStream(Productpath, FileMode.Create))
+                    {
+                        await fileobj.CopyToAsync(stream);
+                        stream.Close();
+                    }
+
+                    production.ProfilePicture = Productpath;
+                    production.ImageName = fileobj.FileName;
+
+                    _context.Add(production);
+                    await _context.SaveChangesAsync();
                 }
-
-                production.ProfilePicture = Productpath;
-                production.ImageName = fileobj.FileName;
-
-                _context.Add(production);
-                await _context.SaveChangesAsync();
+                else
+                {
+                    await Response.WriteAsync("Only .Jpg,.png,.Jpeg,.jfif allowed");
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(production);
@@ -115,18 +123,26 @@ namespace Production_Planning_System.Controllers
             {
                 try
                 {
-                   
-                    var Productpath = Path.Combine(webHostEnvironment.WebRootPath, "Images", ProfileImage.FileName);
-                    using (FileStream stream = new FileStream(Productpath, FileMode.Create))
-                    {
-                        await ProfileImage.CopyToAsync(stream);
-                        stream.Close();
-                    }
+                    var imgext = Path.GetExtension(ProfileImage.FileName);
 
-                    production.ProfilePicture = Productpath;
-                    production.ImageName = ProfileImage.FileName;
-                    _context.Update(production);
-                    await _context.SaveChangesAsync();
+                    if (imgext == ".jpg" || imgext == ".png" || imgext == ".jpeg" || imgext == ".jfif")
+                    {
+                        var Productpath = Path.Combine(webHostEnvironment.WebRootPath, "Images", ProfileImage.FileName);
+                        using (FileStream stream = new FileStream(Productpath, FileMode.Create))
+                        {
+                            await ProfileImage.CopyToAsync(stream);
+                            stream.Close();
+                        }
+
+                        production.ProfilePicture = Productpath;
+                        production.ImageName = ProfileImage.FileName;
+                        _context.Update(production);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                       await Response.WriteAsync("Only .Jpg,.png,.Jpeg,.jfif allowed");
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {

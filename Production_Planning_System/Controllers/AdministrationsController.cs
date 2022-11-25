@@ -46,22 +46,29 @@ public async Task<IActionResult> Index()
         {
             if (ModelState.IsValid)
             {
-               // var imgext = Path.GetExtension(ProfileImage.FileName);
+                var imgext = Path.GetExtension(ProfileImage.FileName);
               
-                  
-                var path = Path.Combine(webHostEnvironment.WebRootPath, "Images", ProfileImage.FileName);
-                using (FileStream stream = new FileStream(path, FileMode.Create))
+                  if(imgext == ".jpg" || imgext == ".png" || imgext==".jpeg"|| imgext == ".jfif")
                 {
-                    await ProfileImage.CopyToAsync(stream);
-                    stream.Close();
+                    var path = Path.Combine(webHostEnvironment.WebRootPath, "Images", ProfileImage.FileName);
+                    using (FileStream stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ProfileImage.CopyToAsync(stream);
+                        stream.Close();
+                    }
+
+                    administration.ProfilePicture = path;
+                    administration.ImageName = ProfileImage.FileName;
+                    administration.FullName = administration.FirstName + " " + administration.LastName;
+
+                    _context.Add(administration);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    await Response.WriteAsync("Only .Jpg,.png,.Jpeg,.jfif allowed");
                 }
 
-                administration.ProfilePicture = path;
-                administration.ImageName = ProfileImage.FileName;
-                administration.FullName = administration.FirstName + " " + administration.LastName;
-
-                _context.Add(administration);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
            
@@ -97,22 +104,29 @@ public async Task<IActionResult> Index()
             {
                 try
                 {
-
-                    var path = Path.Combine(webHostEnvironment.WebRootPath, "Images", ProfileImage.FileName);
-                    using (FileStream stream = new FileStream(path, FileMode.Create))
+                    var imgext = Path.GetExtension(ProfileImage.FileName);
+                    if (imgext == ".jpg" || imgext == ".png" || imgext == ".jpeg" || imgext == ".jfif")
                     {
-                        await ProfileImage.CopyToAsync(stream);
-                        stream.Close();
+                        var path = Path.Combine(webHostEnvironment.WebRootPath, "Images", ProfileImage.FileName);
+                        using (FileStream stream = new FileStream(path, FileMode.Create))
+                        {
+                            await ProfileImage.CopyToAsync(stream);
+                            stream.Close();
+                        }
+
+                        administration.ProfilePicture = path;
+                        administration.ImageName = ProfileImage.FileName;
+                        administration.FullName = administration.FirstName + " " + administration.LastName;
+
+
+
+                        _context.Update(administration);
+                        await _context.SaveChangesAsync();
                     }
-
-                     administration.ProfilePicture = path;
-                     administration.ImageName = ProfileImage.FileName;
-                     administration.FullName = administration.FirstName + " " + administration.LastName;
-
-
-
-                    _context.Update(administration);
-                    await _context.SaveChangesAsync();
+                    else
+                    {
+                      await  Response.WriteAsync("Only .Jpg,.png,.jfif allowed");
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
